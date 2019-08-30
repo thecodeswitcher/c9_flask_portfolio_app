@@ -18,6 +18,7 @@ filing_single = {
             ,0.32: {'lower': 160726, 'upper': 204100}
             ,0.35: {'lower': 204101, 'upper': 510300}
             ,0.37: {'lower': 510301, 'upper':None}
+            ,'standard_deduction':12200
               }
 
 app = Flask(__name__)
@@ -51,11 +52,20 @@ def tax_bracket_calc():
 
         try:
 
-            income = float(request.form['text'])
+            income = float(request.form['income'])
 
         except:
 
             return "Please make sure you enter a number with no commas!"
+
+
+        try:
+
+            deduction = float(request.form['deduction'])
+
+        except:
+
+            deduction = tax_dict['standard_deduction']
 
         taxable_income = income - deduction
 
