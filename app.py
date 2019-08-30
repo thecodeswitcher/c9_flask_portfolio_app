@@ -31,7 +31,9 @@ def profile(name):
 	return render_template('index.html', name=name)
 
 @app.route('/tax_calc', methods=['GET','POST'])
-def tax_bracket_calc(income,tax_dict = filing_single, deduction =12200):
+def tax_bracket_calc():
+    tax_dict = filing_single
+    deduction = 12200
 
     # elif request.method == 'POST':
     #     print(request.form['text'].split())
@@ -49,7 +51,7 @@ def tax_bracket_calc(income,tax_dict = filing_single, deduction =12200):
 
         try:
 
-            float(request.form['text'])
+            income = float(request.form['text'])
 
         except:
 
