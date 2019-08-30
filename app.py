@@ -20,6 +20,16 @@ filing_single = {
             ,0.37: {'lower': 510301, 'upper':None}
               }
 
+app = Flask(__name__)
+
+@app.route('/', methods=['GET'])
+def home_page():
+	return render_template('index.html')
+
+@app.route('/<name>')
+def profile(name):
+	return render_template('index.html', name=name)
+
 @app.route('/tax_calc', methods=['GET','POST'])
 def tax_bracket_calc(income,tax_dict = filing_single, deduction =12200):
 
@@ -79,16 +89,6 @@ def tax_bracket_calc(income,tax_dict = filing_single, deduction =12200):
 
         return render_template('tax_calc.html', result='${:,.2f}'.format(tax_owed))
 
-app = Flask(__name__)
-
-
-@app.route('/', methods=['GET'])
-def home_page():
-	return render_template('index.html')
-
-@app.route('/<name>')
-def profile(name):
-	return render_template('index.html', name=name)
 
 
 @app.route('/add_numbers', methods=['GET','POST'])
